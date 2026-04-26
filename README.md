@@ -2,6 +2,8 @@
 
 A structured 5-phase debugging methodology for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Root cause first, fixes second.
 
+**简体中文：** [README.zh-CN.md](./README.zh-CN.md)
+
 ## Why
 
 Claude Code is great at writing code, but when it hits a bug, the default behavior is often "try random fixes until something works." This skill forces a systematic approach:
