@@ -1,86 +1,42 @@
-# systematic-debugging
+# systematic-debugging-skill
 
-A structured 5-phase debugging methodology for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Root cause first, fixes second.
+**English:** [README.en.md](./README.en.md)
 
-**简体中文：** [README.zh-CN.md](./README.zh-CN.md)
+---
 
-## Why
+面向 Claude Code 的**单文件 Skill**：用 **Phase 0 上下文回忆 → Phase 1 根因调查 → Phase 2 模式对比 → Phase 3 假设验证 → Phase 4 实现** 的强制顺序，约束「先找根因再改代码」；`SKILL.md` 写明未完成前一阶段不得进入下一阶段。
 
-Claude Code is great at writing code, but when it hits a bug, the default behavior is often "try random fixes until something works." This skill forces a systematic approach:
+## When to use
 
-1. **Phase 0: Memory Recall** — Check if you've seen this before
-2. **Phase 1: Root Cause Investigation** — Read errors, reproduce, trace data flow
-3. **Phase 2: Pattern Analysis** — Find working examples, compare differences
-4. **Phase 3: Hypothesis Testing** — One variable at a time, scientific method
-5. **Phase 4: Implementation** — Failing test first, then single fix
+- 出现 **Bug、测试失败、意外行为、性能问题、构建失败、集成故障** 等需要归因的技术问题，且在给出修复方案**之前**（与 `SKILL.md` frontmatter `when_to_use` 及正文「Use for ANY technical issue」列表一致）。
+- 时间紧、想「先改一行试试」或已试过多次补丁仍失败——`SKILL.md` 明确把这些列为**更应**走流程的情形。
+- 多组件链路上需要在边界加日志取证后再判断故障点（见 `SKILL.md` Phase 1「Gather Evidence in Multi-Component Systems」）。
 
-The iron law: **no fixes without root cause investigation first.**
+## When NOT to use
 
-## Install
+- **没有**可调查的缺陷或失败现象、也不存在「意外行为 / 性能 / 构建 / 集成」类待诊断问题时——Iron Law 与 Phase 4 的「Create Failing Test Case」均以**存在待修复问题**为前提（见 `SKILL.md` Overview / Phase 4）。
+- 纯概念问答、与当前代码失败无关的泛读，而不进入任何修复闭环时，本 Skill 的阶段闸门与「NO FIXES WITHOUT ROOT CAUSE」约束不对齐。
+- 无法遵守「Phase 0 输出未完成不得进入 Phase 1」等硬门槛的执行环境，应先调整流程而非跳过 `SKILL.md` 中的违规定义。
+
+## Quick Start
 
 ```bash
-# Clone into your Claude Code skills directory
 git clone https://github.com/runesleo/systematic-debugging-skill ~/.claude/skills/systematic-debugging
 ```
 
-Or manually copy `SKILL.md` to `~/.claude/skills/systematic-debugging/SKILL.md`.
+或手动将 `SKILL.md` 复制到 `~/.claude/skills/systematic-debugging/SKILL.md`。
 
-## Usage
+在对话中可手动引用本技能；或在 `CLAUDE.md` 中写明遇到错误时先按 `SKILL.md` 执行（与仓库内英文说明一致）。
 
-The skill triggers automatically when Claude Code encounters errors. You can also invoke it manually:
+## 典型场景
 
-```
-/debug
-```
+- CI 红：先对照 Phase 0/1 拉齐日志与最近变更，再动代码。
+- 线上偶发：先稳定复现与数据流追踪，再提交单点修复。
+- 已两次补丁失败：按 `SKILL.md` Phase 4.5，第三次以上应停下来讨论架构而非继续堆修复。
 
-Or reference it in your `CLAUDE.md`:
+## 仓库结构（贡献者）
 
-```markdown
-When encountering bugs, use the systematic-debugging skill before attempting fixes.
-```
-
-## The Core Idea
-
-Most debugging time is wasted on:
-- Guessing without evidence
-- Fixing symptoms instead of root causes
-- Trying multiple changes at once
-- Skipping reproduction steps
-
-This skill enforces discipline:
-
-| Metric | Systematic | Random Fixes |
-|--------|-----------|--------------|
-| Time to fix | 15-30 min | 2-3 hours |
-| First-time fix rate | ~95% | ~40% |
-| New bugs introduced | Near zero | Common |
-
-## Red Flags
-
-If Claude starts saying things like:
-- "Quick fix for now, investigate later"
-- "Just try changing X and see"
-- "I don't fully understand but this might work"
-
-...the skill catches these and redirects to Phase 1.
-
-## Customization
-
-The skill is a single Markdown file. Customize it by:
-- Adding project-specific debugging patterns
-- Integrating with your memory/knowledge base in Phase 0
-- Adding domain-specific red flags
-
-## License
-
-MIT
-
-## Author
-
-*Leo ([@runes_leo](https://x.com/runes_leo)) — AI × Crypto independent builder. Trading on [Polymarket](https://polymarket.com/?r=githuball&via=runes-leo&utm_source=github&utm_content=systematic-debugging-skill), building data and trading systems with Claude Code and Codex.*
-
-[leolabs.me](https://leolabs.me) — writing · community · open-source tools · indie projects · all platforms.
-
-[X Subscription](https://x.com/runes_leo/creator-subscriptions/subscribe) — paid content weekly, or just buy me a coffee 😁
-
-*Learn in public, Build in public.*
+| 路径 | 说明 |
+|------|------|
+| `SKILL.md` | 技能全文：五阶段、红线表、Quick Reference；行为变更只改此文件。 |
+| `LICENSE` | 许可证。 |
