@@ -1,5 +1,9 @@
 # systematic-debugging-skill
 
+**English:** [README.en.md](./README.en.md)
+
+---
+
 面向 Claude Code 的**单文件 Skill**：用 **Phase 0 上下文回忆 → Phase 1 根因调查 → Phase 2 模式对比 → Phase 3 假设验证 → Phase 4 实现** 的强制顺序，约束「先找根因再改代码」；`SKILL.md` 写明未完成前一阶段不得进入下一阶段。
 
 ## When to use
@@ -28,7 +32,7 @@ git clone https://github.com/runesleo/systematic-debugging-skill ~/.claude/skill
 
 - CI 红：先对照 Phase 0/1 拉齐日志与最近变更，再动代码。
 - 线上偶发：先稳定复现与数据流追踪，再提交单点修复。
-- 已两次补丁失败：按 `SKILL.md` Phase 4.5，第三次以上应停下来讨论架构而非继续堆修复。
+- 已两次以上补丁仍失败：按 `SKILL.md` Phase 4 中「3+ fixes failed」与 Red Flags，应暂停堆修复、上升为架构与根因讨论，而非继续猜补丁。
 
 ## 仓库结构（贡献者）
 
@@ -36,3 +40,5 @@ git clone https://github.com/runesleo/systematic-debugging-skill ~/.claude/skill
 |------|------|
 | `SKILL.md` | 技能全文：五阶段、红线表、Quick Reference；行为变更只改此文件。 |
 | `LICENSE` | 许可证。 |
+| `SECURITY.md` | 安全披露与联系方式。 |
+| `CODE_OF_CONDUCT.md` | 社区行为准则。 |
