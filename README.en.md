@@ -1,5 +1,9 @@
 # systematic-debugging-skill
 
+**简体中文:** [README.md](./README.md)
+
+---
+
 A single-file Claude Code skill that forces **Phase 0 context recall → Phase 1 root-cause work → Phase 2 pattern diffing → Phase 3 hypothesis tests → Phase 4 implementation**. `SKILL.md` states you may not enter the next phase until the previous one is done, and you may not ship fixes before root-cause investigation.
 
 ## When to use
