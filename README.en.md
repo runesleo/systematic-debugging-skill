@@ -1,5 +1,9 @@
 # systematic-debugging-skill
 
+**简体中文:** [README.md](./README.md)
+
+---
+
 A single-file Claude Code skill that forces **Phase 0 context recall → Phase 1 root-cause work → Phase 2 pattern diffing → Phase 3 hypothesis tests → Phase 4 implementation**. `SKILL.md` states you may not enter the next phase until the previous one is done, and you may not ship fixes before root-cause investigation.
 
 ## When to use
@@ -28,11 +32,13 @@ Reference the skill manually in chat, or point `CLAUDE.md` at it so agents load 
 
 - Red CI: gather logs and recent diffs first, then touch code.
 - Flaky production: stabilize reproduction and trace data flow before a single-variable change.
-- Two failed fixes: `SKILL.md` Phase 4 says stop piling attempts; after three misses, escalate to architecture review instead of a fourth guess.
+- Two or more failed fixes: per `SKILL.md` Phase 4 (“3+ fixes failed”) and Red Flags, stop stacking guesses—escalate to architecture and root-cause review instead of a blind next patch.
 
 ## Repository layout (contributors)
 
 | Path | Role |
 |------|------|
-| `SKILL.md` | Entire skill: phases, red-flag table, quick reference—edit here. |
+| `SKILL.md` | Entire skill: phases, red-flag table, quick reference—edit behavior here. |
 | `LICENSE` | License text. |
+| `SECURITY.md` | Security policy and reporting. |
+| `CODE_OF_CONDUCT.md` | Community code of conduct. |
